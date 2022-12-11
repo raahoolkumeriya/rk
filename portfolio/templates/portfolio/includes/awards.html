@@ -1,0 +1,49 @@
+<div id="achievements" class="ui text container">
+  <p class="ui text center aligned header" style="font-size: 3em; margin: 0em;padding-bottom: 0em !important ">
+    Awards and Achievements
+  </p>
+  <div class="ui horizontal divider">
+    <i class="ui code icon"></i>
+  </div>
+</div>
+<div class="ui container" style="padding-top: 0em;">
+  <div class="ui relaxed divided list">
+    <div class="ui piled raised segment">
+      <div class="ui four column padded grid">
+        <div class="large screen only sixteen wide column">
+          <div class="ui three doubling cards">
+            {% if award_list %}
+            {% for award in award_list %}
+            <div class="card">
+              <div class="ui link huge list" style="color: rgb(61, 61, 61) !important;">
+                <a class="item">{{ award.title }} </a>
+              </div>
+              <div class="ui small bottom right attached label">{{ award.received|date:"Y F" }}</div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No detail are available.</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="tablet only mobile only sixteen wide column">
+          <div class="ui one doubling cards">
+            {% if award_list %}
+            {% for award in award_list %}
+            <div class="card">
+              <div class="ui big link list">
+                <a class="item">{{ award.title }} </a>
+              </div>
+              <div class="ui small bottom right attached label">{{ award.received|date:"Y F" }}</div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No detail are available.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,226 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Projects{% endblock %}
+{% block page_content %}
+{% load static %}
+{% load filter_tags %}
+{% include 'portfolio/includes/menu.html' %}
+
+<div class="ui container raised segment">
+    <a class="ui green large inverted left ribbon label"> /project/index </a>    
+    <div class="ui center aligned container" style="font-size: large;">
+      <span>These are some of the projects that I have completed uptil now.</span>
+      <div class="ui hidden divider"></div>    
+      <div class="ui grid">
+        <div class="sixteen wide mobile only sixteen wide tablet only column">
+          <div class="ui center aligned">
+                {% if project_list %}
+                {% for project in project_list %}
+                <div class="item" style="padding: 1em;">
+                  <a href="#{{ project.slug }}-mob-ver">
+                    <div class="item">
+                      <div>
+                        <span style="color: rgb(61, 61, 61) !important;"> {{ project.title }} </span>
+                      </div>
+                      <div>
+                        <a class="ui mini green label">{{ project.startdate|date:"M Y"}}</a>
+                        <a class="ui mini label">{{ project.category }}</a>
+                      </div>
+                  </div>
+                  </a>
+                </div>
+                {% empty %}
+                <div class="ui text header">
+                  <div class="item">
+                    <p>No projects found.</p>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+             
+        </div>
+        <div class="computer only two column row">
+          <div class="column">
+            <div class="column">
+              <div class="ui list">
+                {% for project in project_list %}
+                {% cycle 'odd' 'even' as state silent %}
+                {% if state == 'odd' %}
+                <div class="item">
+                  <a href="#{{ project.slug }}">
+                    <div class="item">
+                      <div class="ui small right pointing label">
+                        {{ project.category }}
+                      </div>
+                      <span style="color: rgb(61, 61, 61) !important;">{{ project.title }}</span>
+                      <div class="ui tiny inverted green left pointing label">
+                        {{ project.startdate|date:"M Y"}}
+                       </div> 
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="ui text header">
+                  <div class="item">
+                    <p>No projects found.</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="column">
+              <div class="ui list">
+                {% for project in project_list %}
+                {% cycle 'odd' 'even' as state silent %}
+                {% if state == 'even' %}
+                <div class="item">
+                  <a href="#{{ project.slug }}">
+                    <div class="item">
+                      <div class="ui tiny inverted green right pointing label">
+                        {{ project.startdate|date:"M Y"}}
+                       </div> 
+                       <span style="color: rgb(61, 61, 61) !important;">{{ project.title }}</span>
+                      <div class="ui small left pointing label">
+                          {{ project.category }} 
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="ui text header">
+                  <div class="item">
+                    <p>No projects found.</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="ui green large inverted right ribbon label">Total <strong>{{ project_list|length }}</strong> projects </a>
+</div>
+
+<div class="ui center aligned container" style="font-size: large;">
+    <p>** Click on the title of any project or image to see the detailed description</p>
+</div> 
+
+<div class="ui container" style="font-size: medium">
+  <div class="ui column grid">
+    <div class="tablet only mobile only sixteen wide column">
+      {% for project in project_list %}
+        <div id="{{ project.slug }}-mob-ver" class="ui">
+          <a href="/project/{{ project.slug }}">
+            <img class="ui small left floated image" width="50%" height="100%" src="{% if project.image %} 
+              {{ project.image }} 
+            {% else %}
+              {% static 'images/design.svg' %}  
+            {% endif %}" alt="project_image-{{ forloop.counter }}">
+          </a>
+          <div class="text content">
+            <div class="ui link list massive">
+            <a href="/project/{{ project.slug }}">
+              <p class="ui" style="color: rgb(61, 61, 61) !important;">
+                {{ project.title }}</p>
+            </a>
+          </div>
+          <div>
+            <p class="sub header">
+              <a class="ui basic small label">{{ project.startdate }} </a> - {% if project.enddate %}
+              <a class="ui basic small label">{{ project.enddate }}</a>
+              {% else %}
+              <a class="ui red basic small label">Ongoing</a>
+              {% endif %}
+            </p>
+          </div>
+            <div class="description" style="padding-bottom: 1em; padding-top: 1em;">{{ project.summary }}</div>
+            <div class="ui tag labels">
+              {% with project.technology|split:"," as tags %}
+              {% for tag in tags %}
+                <a class="ui label">{{tag}}</a>
+              {% endfor %}
+              {% endwith %}
+            </div>
+
+            <div class="ui hidden divider"></div>
+            <div class="ui link">
+              <a href="{{ project.sourcecode }}" style="background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(187, 185, 185) 100%);" target="_blank" class="ui raised segment button">
+                Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+        {% if forloop.last %}
+        <div class="ui hidden divider"></div> 
+        {% else %}
+        <div class="ui horizontal divider">
+          {{ forloop.counter }}
+        </div>    
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="computer only one column row">
+      <div class="column">
+        {% for project in project_list %}
+        <div id="{{ project.slug }}" class="ui list grid">
+          <div class="three wide column">
+              <a href="/project/{{ project.slug }}">
+                <img class="ui small centered image" width="50%" height="100%" src="{% if project.image %} 
+                  {{ project.image }} 
+                {% else %}
+                  {% static 'images/design.svg' %}  
+                {% endif %}" alt="project_image-{{ forloop.counter }}">
+              </a>
+          </div>
+          <div class="ten wide column">
+              <div class="text content">
+                <div class="ui link list massive">
+                  <a href="/project/{{ project.slug }}">
+                  <p class="ui" style="color: rgb(63, 62, 62); font-size: large">{{ project.title }}</p>
+                </a>
+              </div>
+              <div>
+                <p class="sub header">
+                  <a class="ui basic small label">{{ project.startdate }} </a> - {% if project.enddate %}
+                  <a class="ui basic small label">{{ project.enddate }}</a>
+                  {% else %}
+                  <a class="ui red basic small label">Ongoing</a>
+                  {% endif %}
+                </p>
+              </div>
+                <div class="description" style="padding-bottom: 1em; padding-top: 1em;">{{ project.summary }}</div>
+                <div class="ui tag labels">
+                  {% with project.technology|split:"," as tags %}
+                  {% for tag in tags %}
+                    <div class="ui label">{{tag}}</div>
+                  {% endfor %}
+                  {% endwith %}
+                </div>
+              </div>
+          </div>
+          <div class="three wide column">
+              <a href="{{ project.sourcecode }}" style="background: linear-gradient(90deg, rgb(187, 185, 185) 0%, rgb(255, 255, 255) 100%);" target="_blank" class="ui raised segment button">
+                Source Code
+              </a>
+          </div>
+        </div>
+        {% if forloop.last %}
+        <div class="ui hidden divider"></div> 
+        {% else %}
+        <div class="ui horizontal divider">
+          {{ forloop.counter }}
+        </div>    
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'portfolio/includes/back_button.html' %}
+{% include 'portfolio/includes/footer.html' %}
+{% endblock %}

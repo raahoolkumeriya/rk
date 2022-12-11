@@ -1,0 +1,27 @@
+{% load static %}
+<div class="ui four column padded grid" style="width: auto !important; padding: 2em;">
+  <div class="mobile only sixteen wide stackable column">
+    <div class="ui fixed labeled link tiny icon six item menu">
+      <a class="active item" href="/"><i aria-hidden="true" class="ui home icon"></i>Home</a>
+      <a class="item" href="{% url 'portfolio:project-list' %}"><i aria-hidden="true" class="th list icon"></i>Projects</a>
+      <a class="item" href="{% url 'portfolio:experience-list' %}"><i aria-hidden="true" class="phoenix framework icon"></i>Experience</a>
+      <a class="item" href="{% url 'portfolio:note-list' %}"><i aria-hidden="true" class="object ungroup icon"></i>Gist</a>
+      <a class="item" href="{% url 'portfolio:contact' %}"><i aria-hidden="true" class="envelope open outline icon"></i>Contact</a>
+    </div>
+  </div>
+  <div class="computer only one column row">
+    <div class="column">
+      <div class="ui massive link list secondary menu">
+        <a class="ui active item raised inverted" href="/">__rahul_kumeriya__</a>
+        <div class="right menu">
+          <a class="item inverted" href="{% url 'portfolio:project-list' %}" style="animation:flash 1.5s ease-in-out infinite;">
+            <i class="flag green icon"></i>Projects</a>
+          <a class="item inverted" href="{% url 'portfolio:experience-list' %}">Experience</a>
+          <a class="item inverted" href="{% url 'portfolio:note-list' %}">Gist</a>
+          <a class="item inverted" href="https://docs.google.com/document/d/1aeDuwuT_fwPFJxc80L2BTWPmobYejq1lXNL7ccZJt3w/edit?usp=sharing" target="_blank">Resume</a>
+          <a class="item inverted" href="{% url 'portfolio:contact' %}">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

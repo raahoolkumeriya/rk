@@ -1,0 +1,47 @@
+{% load static %}
+<div id="projects" class="ui center aligned">    
+    <div class="ui text container" style="padding-top: 0em;">
+      <p class="ui text center aligned header"
+        style="font-size: 3em; margin-bottom: 0em;padding-bottom: 0em !important ">
+        Noteworthy Projects
+    </p>
+      <div class="ui horizontal divider">
+        <i class="ui code icon"></i>
+      </div>
+  </div>
+  <div class="ui stripe community vertical container">
+    <div class="ui three column center aligned divided very relaxed stackable grid container">
+      <div class="row">
+        {% if project_list %}
+        {% for project in project_list %}
+          <div class="column">
+            <a href="{% url 'portfolio:project-detail' project.slug %}">
+              <div class="ui disabled image">
+                <img class="ui medium image" width="50%" height="50%"
+                src="{% if project.image %} 
+                      {{ project.image }} 
+                    {% else %} 
+                      {% static 'images/default.svg' %} 
+                    {% endif %}" alt="project-detail-image-{{ forloop.counter }}">
+              </div>
+              <h2 class="ui header">
+                {{ project.title }}
+              </h2>
+            </a>
+            <div class="ui hidden divider"></div>
+          <p>{{ project.summary }}</p>
+          </div>
+        {% endfor %}
+        {% else %}
+        <p>No project are available.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  <div class="fluid ui buttons" style="padding-top: 0%;">
+    <a href="{% url 'portfolio:project-list' %}" style="background: linear-gradient(200deg, rgb(187, 185, 185) 0%, rgb(255, 255, 255) 100%);" class="ui raised segment text container button">
+      View All Projects
+    </a>
+  </div>
+</div>

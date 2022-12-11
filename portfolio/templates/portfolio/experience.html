@@ -1,0 +1,72 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Experience{% endblock %}
+{% block page_content %}
+{% load static %}
+{% include 'portfolio/includes/menu.html' %}
+
+<div class="ui container" >
+  <a class="ui green large inverted left ribbon label"> /professional/experience </a>
+  <div class="ui hidden divider"></div>
+  <div class="ui" style="color: rgb(61, 61, 61) !important;">
+    {% if experience_list %}
+    {% for item in experience_list %}
+    <div class="ui hidden divider"></div>
+    <div class="column">
+      <p class="ui huge link list item" style="margin-bottom: 0%; color: rgb(119, 117, 117) !important;">{{ item.start_date|date:"F Y"}} - {% if item.end_date %}
+        {{ item.end_date|date:"F Y"}}
+        {% else %}
+        Present
+        {% endif %}
+      </p>
+      <span style="color: rgb(175, 172, 172) !important;">{{ item.start_date|timesince:item.end_date }}</span>
+    </div>
+
+    <div class="ui hidden divider"></div>
+        <div class="ui grid">
+          <div class="two wide column">
+            <div class="ui vertical divider" style="padding-left: 0.4em;">
+              <i class="chevron right icon" style="color: rgb(175, 172, 172) !important;"></i>
+            </div>
+            </div>
+          <div class="twelve wide computer fourteen wide tablet fourteen wide mobile column">  
+              <div class="ui piled raised segment one cards">
+                <div>
+                  <div class="ui link huge list">
+                    <a class="item">{{ item.title }} </a>
+                  </div>
+                  <div class="description">
+                  <p style="color: rgb(61, 61, 61) !important;">{{ item.experience|safe }}</p>  
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <div class="six wide right floated column center aligned">
+          Under Constuction...
+          <img class="ui centered medium rounded image" src="{% static 'images/void.svg' %}" alt="void-image">
+        </div>
+        {% endif %}
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+
+    <div style="position:fixed;margin:2em;bottom:0;left:0;animation:flash 2s ease-in-out infinite;z-index:6;" >
+      <a href="https://docs.google.com/document/d/1aeDuwuT_fwPFJxc80L2BTWPmobYejq1lXNL7ccZJt3w/edit?usp=sharing" class="ui raised segment button" 
+      style="background: linear-gradient(90deg, rgb(187, 185, 185) 0%, rgb(255, 255, 255) 100%);">View Resume</a>
+    </div>    
+
+    <div style="position:fixed;margin:2em;bottom:0;right:0;animation:flash 2s ease-in-out infinite;z-index:12;" >
+      <a href="https://docs.google.com/document/d/1fF86bzzIW9bdCWmRp6QDJ_eqEHd0PK4uvDnqQFJcIsY/edit?usp=sharing" class="ui raised segment button" 
+      style="background: linear-gradient(260deg, rgb(187, 185, 185) 0%, rgb(255, 255, 255) 100%);">View CV</a>
+    </div>      
+
+
+{% include 'portfolio/includes/footer.html' %}
+{% endblock %}

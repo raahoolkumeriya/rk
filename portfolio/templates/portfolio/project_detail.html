@@ -1,0 +1,72 @@
+{% extends "portfolio/base.html" %}
+{% block title %}{{ object.title|title }}{% endblock %}
+{% block page_content %}
+{% include 'portfolio/includes/menu.html' %}
+{% load static %}
+{% load compress %}
+{% compress css %}
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css"> -->
+<link rel="stylesheet" href="{% static 'highlighted_code.css' %}" type="text/css" charset="utf-8">
+{% endcompress %}
+<style>
+    .masthead {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% if object.image %} {{ object.image }} {% else %} {% static "images/default.svg" %} {% endif %}') !important;
+        background-size: cover !important;
+        background-attachment: fixed;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-blend-mode: multiply;
+        color: #fff;
+        padding: 1em;
+        text-shadow: 0 0 1em #000;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        line-height: 1.5em;
+        padding-bottom: 5em;
+
+    }
+    h1.ui.center.header {
+        font-size: 3em;
+        margin-top: 3em;
+        margin-bottom: 0em;
+    }
+</style>
+
+{% compress js preload %}
+<!-- highlight.js-->
+<script src="{% static 'highlight.min.js'%}" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- highlight.js -->
+{% endcompress %}
+<div class="ui masthead center aligned" style="flex-grow: 2;">
+    <div class="ui center aligned padded grid">
+        <h1 class="ui center massive green header" style="animation:pulse 3s ease-in-out infinite;">
+            {{ object.title|title }}
+        </h1>
+    </div>
+    <div class="ui inverted text container horizontal divider">
+        <p class="ui small green header">
+            {{object.pub_date}}
+        </p>
+    </div>
+</div>
+<div class="ui container">
+    <p>
+        {{object.pub_date}} <i class="icon leanpub"> </i>{{ object.get_readtime }} read
+    </p>
+    <div class="ui" style="overflow:hidden; max-width: 100%; overflow-wrap: break-word;">
+        {{ object.description|safe }}
+    </div>
+    <div class="ui horizontal divider"><i class="ui icon code"></i></div>
+    <div id="disqus_thread"></div>
+    {% include 'portfolio/includes/js.html' %}
+</div>
+<div style="position:fixed;margin:2em;bottom:0;left:0;animation:flash 2s ease-in-out infinite;z-index:6;" >
+    <a href="{% url 'portfolio:project-list' %}" class="ui raised segment button" 
+    style="background: linear-gradient(90deg, rgb(187, 185, 185) 0%, rgb(255, 255, 255) 100%);">project list</a>
+</div>  
+{% include 'portfolio/includes/footer.html' %}
+{% endblock %}

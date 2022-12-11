@@ -1,0 +1,35 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+{% block title %} 404 Not Found {% endblock %}
+{% block page_content %}
+
+<div class="ui container">
+  <div class="ui four column grid">
+    <div class="mobile only sixteen wide column">
+      <div class="ui">
+        <img class="ui massive left floated image" style="animation:flash 2s ease-in-out infinite;z-index:10;"  
+        src="{% static 'images/404.svg' %}">
+          <span style="font-size:25vw;">{{ status_code }}</span>
+         <span>Page Not Found.</span>
+      </div>
+    </div>
+    <div class="computer only two column row">
+      <div class="column">
+        <span>Page Not Found.</span> 
+          <p class="ui center aligned container" 
+            style="font-size:25vw; margin-bottom: 0; padding-top: 0.3em; padding-bottom: 0em;">
+            {{ status_code }}</p>
+      </div>
+      <div class="column">
+        <img style="animation:flash 2s ease-in-out infinite;z-index:10;" 
+          class="ui huge image" src="{% static 'images/404.svg' %}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:fixed;margin:2em;bottom:0;left:0;">
+  <a href="/" class="ui raised segment button">Home</a>
+</div>
+{% endblock %}

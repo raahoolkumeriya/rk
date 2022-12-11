@@ -1,0 +1,57 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Gist{% endblock %}
+{% block page_content %}
+{% include 'portfolio/includes/menu.html' %}
+{% load filter_tags %}
+<div class="ui container">
+    <div class="ui two column stackable grid">
+        <div class="twelve wide column ">
+            {% if note_list %}
+            {% for note in note_list %}
+            <div class="ui raised segment">
+                <div>
+                    <a class="ui green large inverted left ribbon label">{{ note.note|title }}</a>
+                </div>
+                <div class="ui hidden divider"></div>
+                <div>
+                    {{ note.description|safe }}
+                    <div class="ui hidden divider"></div>
+                </div>
+                <div>
+                    <a href="{{ note.gisturl }}"  target="_blank" class="ui raised segment button">
+                        View Code
+                    </a>
+                </div>
+                <div class="ui link list">
+                    {% with note.tags|split:"," as items %}
+                    {% for tag in items %}
+                        <div class="ui label">{{tag|title}}</div>
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="ui text container center aligned segment"> Zero gist found!</p>
+            {% endif %}
+        </div>
+        <div class="four wide column">
+            <div class="ui raised segment">
+                <div class="ui">
+                    <a href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Ffomantic-ui.com%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Efomanticui&screen_name=kumeriyaRahul"
+                        class="ui fluid button twitter-follow-button" data-size="large" data-show-screen-name="false"
+                        data-lang="en" data-dnt="true" data-show-count="false">
+                    </a>
+                </div>
+                <a class="twitter-timeline" data-height="500"
+                    href="https://twitter.com/KumeriyaRahul?ref_src=twsrc%5Etfw">
+                    Tweets by KumeriyaRahul
+                </a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'portfolio/includes/back_button.html' %}
+{% include 'portfolio/includes/footer.html' %}
+{% endblock %}

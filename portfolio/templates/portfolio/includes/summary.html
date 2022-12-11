@@ -1,0 +1,31 @@
+{% load static %}
+<div class="ui stripe community vertical container">
+    <div class="ui three column center aligned divided very relaxed stackable grid container">
+      <div class="row">
+        {% if summary_list %}
+        {% for item in summary_list %}
+        <div class="ui column">
+          <div class="ui disabled image">
+            <img class="ui medium image" height="50%" width="50%" src="{% if item.summary_image %}
+            {{ item.summary_image }}
+            {% else %}
+              {% static 'images/design.svg' %}
+            {% endif %}"
+              alt="design-{{ forloop.counter }}">
+          </div>
+          <div class="ui hidden divider"></div>
+          <p>
+            {{ item.summary|safe }}
+          </p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="column">
+          <div class="ui image">
+            <img class="ui small image" src="{% static 'images/void.svg' %}" alt="null-image">
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,79 @@
+{% spaceless %}
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Rahul Kumeriya's Portfolio is portfolio website for sharing the notable work and contribution of Rahul Kumeriya towards IT industry and new technologies">
+  <meta name="author" content="Rahul Kumeriya">
+  <meta name="google-site-verification" content="sXJlMSTXdk6jtqybrlN1RqGQjVY7RULciRi7Ifo1_Zk" />
+  <title>{% block title %} {% endblock %} | Rahul Kumeriya's portfolio</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+  <link rel="canonical" href="https://rahulkumeriya.herokuapp.com/">
+  
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> -->
+  {% compress css %}  
+  
+  <link rel="stylesheet" href="{% static 'semantic.min.css' %}" type="text/css" charset="utf-8">
+  <style>
+
+    body{
+      height: 100%;
+      margin: 0;
+        position: relative;
+        background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(187, 185, 185) 100%);
+        height: 90vh;
+    }
+
+    .container {
+      padding: 30px;
+    }
+    body {
+        padding-bottom: 14px;
+        margin-bottom: 60px;
+        color: rgb(61, 61, 61) !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: grayscale;
+      }
+    .ui.secondary.menu .item {
+      width: auto !important;
+    }
+    @keyframes flash {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(0.5em);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }  
+    p {
+    font-size: large;
+    color: rgb(61, 61, 61) !important;
+    }
+  </style>
+  {% endcompress %}
+</head>
+<body>
+  {% block page_content %}
+  {% endblock %}
+  {% block script %}
+  {% endblock %}
+</body>
+<!-- <script type="text/javascript">
+  (function(d, m){
+    var kommunicateSettings = 
+        {"appId":"68ebceb087d52c573ac266cb0a5a3e0e","popupWidget":true,"automaticChatOpenOnNavigation":true};
+    var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+    s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+    var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+    window.kommunicate = m; m._globals = kommunicateSettings;
+})(document, window.kommunicate || {});
+</script> -->
+</html>
+{% endspaceless %}
